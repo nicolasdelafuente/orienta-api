@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./app.js"
+    "dev": "nodemon ./app.js",
+    "dev:0": "npm run dev:models && npm run dev:seeders && npm run dev:reset && npm run dev",
+    "dev:models": "node ./src/database/create-models.js",
+    "dev:seeders": "node ./src/database/create-seeders.js",
+    "dev:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
