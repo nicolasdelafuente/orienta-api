@@ -1,2 +1,6 @@
 node_modules/
+src/logs/*
+!src/logs/dummy.log
+src/storage/*
+!src/storage/dummy.log
 .env
