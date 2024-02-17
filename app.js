@@ -7,5 +7,5 @@ app.use(cors());
 const port = 3000;
 
 app.listen(port, () => {
-    console.log(`Servidor iniciado en el puerto ${port}`);
+    console.log(`The server has started successfully at http://localhost:${port}`);
 });
