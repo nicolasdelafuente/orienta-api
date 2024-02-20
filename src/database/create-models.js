@@ -11,9 +11,9 @@ for (const file of files) {
 }
 
 const commands = [
+  'npx sequelize-cli model:generate --name Genero --attributes nombre:string --force',
   'npx sequelize-cli model:generate --name DocumentoTipo --attributes nombre:string --force',
   'npx sequelize-cli model:generate --name SeguimientoTipo --attributes nombre:string --force',
-  'npx sequelize-cli model:generate --name Genero --attributes nombre:string --force',
   'npx sequelize-cli model:generate --name Rol --attributes nombre:string --force',
   'npx sequelize-cli model:generate --name Pais --attributes nombre:string,nacionalidad:string,iso:string --force',
   'npx sequelize-cli model:generate --name Provincia --attributes nombre:string,id_pais:integer --force',
