@@ -24,6 +24,7 @@ const getItems = async (req, res) => {
     }
 };
 
+
 /**
  * Obtener una carrera por su ID.
  * @param {Object} req - Objeto de solicitud de Express que contiene los parámetros de la solicitud.
@@ -41,4 +42,20 @@ const getItem = async (req, res) => {
     }
 }
 
-module.exports = { getItems, getItem };
+
+/**
+ * Obtener un registro de Base de datos
+ * @param {*} req 
+ * @param {*} res 
+ */
+const createItem = async (req, res) => {
+    try {
+        const data = await Carrera.create({ req });
+        res.send({ data });
+    } catch (e) {
+        logSqlErrorAndQuery(e); 
+        handleHttpError(res, e.message, 'ERROR_CREATE_ITEMS', 403)
+    }
+}
+
+module.exports = { getItems, getItem, createItem };
