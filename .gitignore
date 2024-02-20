@@ -6,10 +6,4 @@ src/logs/*
 src/storage/*
 !src/storage/dummy.txt
 
-src/database/migrations/*
-!src/database/migrations/dummy.txt
-
-src/database/seeders/*
-!src/database/seeders/dummy.txt
-
 .env
