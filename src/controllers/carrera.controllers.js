@@ -16,7 +16,12 @@ const attributes = [
  */
 const getItems = async (req, res) => {
     try {
-        const data = await Carrera.findAll();
+        const data = await Carrera.findAll({
+            where: {
+                deleted: false
+            },
+            attributes: { exclude: ['deleted'] }
+        });
         res.send({ data });
     } catch (error) {
         logSqlErrorAndQuery(error); 
@@ -32,7 +37,16 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const data = await Carrera.findByPk(id);
+        const data = await Carrera.findOne({
+            where: {
+                id,
+                deleted: false
+            }
+            ,
+            attributes: {
+                exclude: ['deleted']
+            }
+        });
         if (!data) {
             return res.status(404).json({ error: 'Carrera no encontrada' });
         }
@@ -66,11 +80,21 @@ const createItem = async (req, res) => {
 const updateItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const carrera = await Carrera.findByPk(id);
-        if (!carrera) {
+        const data = await Carrera.findOne({
+            where: {
+                id,
+                deleted: false
+            }
+            ,
+            attributes: {
+                exclude: ['deleted']
+            }
+        });       
+        if (!data) {
             return res.status(404).json({ error: 'Carrera no encontrada' });
         }
-        const updatedCarrera = await carrera.update(req.body);
+
+        const updatedCarrera = await data.update(req.body);
         res.status(200).json({ success: true, data: updatedCarrera });
     } catch (error) {
         logSqlErrorAndQuery(error); 
@@ -78,4 +102,70 @@ const updateItem = async (req, res) => {
     }
 };
 
-module.exports = { getItems, getItem, createItem, updateItem };
+
+/**
+ * Eliminar logicamente un registro de carrera en la base de datos.
+ * @param {Object} req - El objeto de solicitud HTTP que debe contener el ID de la carrera.
+ * @param {Object} res - El objeto de respuesta HTTP.
+ */
+const deleteItem = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await Carrera.findOne({
+            where: {
+                id,
+                deleted: false
+            }
+            ,
+            attributes: {
+                exclude: ['deleted']
+            }
+        });       
+        if (!data) {
+            return res.status(404).json({ error: 'Carrera no encontrada' });
+        }
+
+        await data.update({ deleted: true });
+
+        res.status(200).json({ success: true, message: 'Carrera eliminada correctamente' });
+    } catch (error) {
+        logSqlErrorAndQuery(error); 
+        handleHttpError(res, error.message, 'ERROR_SOFT_DELETE_ITEM', 500);
+    }
+};
+
+/**
+ * Restaurar logicamente un registro de carrera en la base de datos.
+ * @param {Object} req - El objeto de solicitud HTTP que debe contener el ID de la carrera.
+ * @param {Object} res - El objeto de respuesta HTTP.
+ */
+const restoreItem = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await Carrera.findOne({
+            where: {
+                id,
+                deleted: true
+            }
+            ,
+            attributes: {
+                exclude: ['deleted']
+            }
+        });      
+        if (!data) {
+            return res.status(404).json({ error: 'Carrera no encontrada' });
+        }
+
+        await data.update({ deleted: false });
+
+        res.status(200).json({ success: true, message: 'Carrera restaurada correctamente' });
+    } catch (error) {
+        logSqlErrorAndQuery(error); 
+        handleHttpError(res, error.message, 'ERROR_RESTORE_ITEM', 500);
+    }
+};
+
+
+
+
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem, restoreItem };
