@@ -10,10 +10,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
+        unique: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
       id_instituto: {
+        allowNull: false,
         type: Sequelize.INTEGER
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false 
       },
       createdAt: {
         allowNull: false,
