@@ -15,10 +15,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   Carrera.init({
     nombre: DataTypes.STRING,
-    id_instituto: DataTypes.INTEGER
+    id_instituto: DataTypes.INTEGER,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Carrera',
   });
   return Carrera;
 };
+
+
