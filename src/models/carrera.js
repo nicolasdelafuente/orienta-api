@@ -14,8 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Carrera.init({
-    nombre: DataTypes.STRING,
-    id_instituto: DataTypes.INTEGER,
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true,
+      }
+    },
+    id_instituto: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
