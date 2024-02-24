@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Storage.init({
     nombre: DataTypes.STRING,
-    url: DataTypes.STRING
+    url: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Storage',

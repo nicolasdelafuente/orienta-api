@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   Entrevista.init({
     nombre: DataTypes.STRING,
     observaciones: DataTypes.STRING,
-    acciones: DataTypes.STRING
+    acciones: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Entrevista',

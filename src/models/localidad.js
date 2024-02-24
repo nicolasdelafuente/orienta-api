@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Localidad.init({
     nombre: DataTypes.STRING,
-    id_provincia: DataTypes.INTEGER
+    id_provincia: DataTypes.INTEGER,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Localidad',

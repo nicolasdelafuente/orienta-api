@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SeguimientoTipo.init({
-    nombre: DataTypes.STRING
+    nombre: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'SeguimientoTipo',

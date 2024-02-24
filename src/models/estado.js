@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Estado.init({
     nombre: DataTypes.STRING,
-    color: DataTypes.STRING
+    color: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Estado',

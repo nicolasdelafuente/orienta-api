@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   Pais.init({
     nombre: DataTypes.STRING,
     nacionalidad: DataTypes.STRING,
-    iso: DataTypes.STRING
+    iso: DataTypes.STRING,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Pais',

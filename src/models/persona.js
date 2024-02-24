@@ -25,7 +25,11 @@ module.exports = (sequelize, DataTypes) => {
     id_localidad: DataTypes.INTEGER,
     id_provincia: DataTypes.INTEGER,
     id_pais: DataTypes.INTEGER,
-    id_carrera: DataTypes.INTEGER
+    id_carrera: DataTypes.INTEGER,
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Persona',
