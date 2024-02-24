@@ -9,7 +9,7 @@
     "dev:models": "node ./src/database/create-models.js",
     "dev:seeders": "node ./src/database/create-seeders.js",
     "dev:init": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run dev",
-    "test": "mocha test/index.test.js"
+    "test": "mocha test/index.js"
   },
   "keywords": [],
   "author": "",
