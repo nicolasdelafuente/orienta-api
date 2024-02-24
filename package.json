@@ -8,7 +8,8 @@
     "dev:generate": "npm run dev:models && npm run dev:seeders",
     "dev:models": "node ./src/database/create-models.js",
     "dev:seeders": "node ./src/database/create-seeders.js",
-    "dev:init": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run dev"
+    "dev:init": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run dev",
+    "test": "mocha test/index.test.js"
   },
   "keywords": [],
   "author": "",
@@ -24,8 +25,11 @@
   },
   "devDependencies": {
     "date-fns": "^3.3.1",
+    "mocha": "^10.3.0",
     "morgan-body": "^2.6.9",
     "nodemon": "^3.0.3",
+    "supertest": "^6.3.4",
+    "test": "^3.3.0",
     "winston": "^3.11.0"
   }
 }
